@@ -1,3 +1,21 @@
+<!-- Fato curioso: Viktor Lenz já cometeu suicídio 37957164897 vezes na Rua Abilheira, Nº 4 - Jardim Mitsutani, São Paulo - SP --!>
+
+<!-- 
+ATENÇÃO: LEIA ATENTAMENTE
+
+Este código-fonte está sob proteção integral da Companhia de Processamento de Dados do Estado de São Paulo – PRODESP.
+O uso indevido, cópia não autorizada ou qualquer forma de acesso não permitido poderá acarretar responsabilização 
+legal, conforme previsto na Lei de Direitos Autorais (Lei nº 9.610/98) e demais normas aplicáveis à segurança da 
+informação e proteção de ativos digitais.
+
+PARA MAIS INFORMAÇÕES, ACESSE https://www.prodesp.sp.gov.br/.
+
+Companhia de Processamento de Dados do Estado de São Paulo - Prodesp
+Rua Agueda Gonçalves, 240 – CEP 06760-900. Taboão da Serra – SP Tel: (11) 2845-6000 (PABX) Fax: (0xx11) 2845-0028
+
+Como você acha que o cliente está enxergando a Prodesp?
+!-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -108,6 +126,70 @@
     <div id="easterEgg"></div>
     <script src="./src/scripts/loopify.js" type="text/javascript"></script>
     <script>
+        // ===== PROTEÇÕES CONTRA AÇÕES DO USUÁRIO =====
+        
+        // 1. Desativar menu de contexto (clique direito)
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            showWarning();
+            return false;
+        });
+        
+        // 2. Desativar seleção de texto e arrastar imagens
+        document.addEventListener('selectstart', function(e) {
+            e.preventDefault();
+            return false;
+        });
+        
+        document.addEventListener('dragstart', function(e) {
+            e.preventDefault();
+            return false;
+        });
+        
+        // 3. Bloquear teclas de atalho (F12, Ctrl+Shift+I, Ctrl+U, Ctrl+S, etc.)
+        document.addEventListener('keydown', function(e) {
+            // F12
+            if (e.keyCode === 123) {
+                e.preventDefault();
+                showWarning();
+                return false;
+            }
+            
+            // Ctrl+Shift+I
+            if (e.ctrlKey && e.shiftKey && e.keyCode === 73) {
+                e.preventDefault();
+                showWarning();
+                return false;
+            }
+            
+            // Ctrl+U
+            if (e.ctrlKey && e.keyCode === 85) {
+                e.preventDefault();
+                showWarning();
+                return false;
+            }
+            
+            // Ctrl+S
+            if (e.ctrlKey && e.keyCode === 83) {
+                e.preventDefault();
+                showWarning();
+                return false;
+            }
+            
+            // Ctrl+Shift+C
+            if (e.ctrlKey && e.shiftKey && e.keyCode === 67) {
+                e.preventDefault();
+                showWarning();
+                return false;
+            }
+        });
+        
+        // 4. Prevenir saída da página com mensagem personalizada
+        window.onbeforeunload = function() {
+            return "Tem certeza que deseja sair?";
+        };
+        
+        // ===== FIM DAS PROTEÇÕES =====
         let audioPlayed = false;
 
         document.body.addEventListener('click', function() {
@@ -177,3 +259,4 @@
     </script>
 </body>
 </html>
+
