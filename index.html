@@ -1,9 +1,27 @@
+<!-- Fato curioso: Viktor Lenz já cometeu suicídio 37957164897 vezes na Rua Abilheira, Nº 4 - Jardim Mitsutani, São Paulo - SP --!>
+
+<!-- 
+ATENÇÃO: LEIA ATENTAMENTE
+
+Este código-fonte está sob proteção integral da Companhia de Processamento de Dados do Estado de São Paulo – PRODESP.
+O uso indevido, cópia não autorizada ou qualquer forma de acesso não permitido poderá acarretar responsabilização 
+legal, conforme previsto na Lei de Direitos Autorais (Lei nº 9.610/98) e demais normas aplicáveis à segurança da 
+informação e proteção de ativos digitais.
+
+PARA MAIS INFORMAÇÕES, ACESSE https://www.prodesp.sp.gov.br/.
+
+Companhia de Processamento de Dados do Estado de São Paulo - Prodesp
+Rua Agueda Gonçalves, 240 – CEP 06760-900. Taboão da Serra – SP Tel: (11) 2845-6000 (PABX) Fax: (0xx11) 2845-0028
+
+Como você acha que o cliente está enxergando a Prodesp?
+!-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="icon" type="image/x-icon" href="./src/media/images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="./src/media/images/favicon.ico">
     <title>Governo do Estado de São Paulo</title>
     <style>
         body {
@@ -17,6 +35,12 @@
             font-family: Arial, sans-serif;
             text-align: center;
             flex-direction: column;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
         #warning {
             display: block;
@@ -26,15 +50,29 @@
             border-radius: 15px;
             text-align: center;
         }
-		#logo {
+        #logo {
             max-width: 400px;
             margin-bottom: 10px;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            pointer-events: none;
         }
         #apng {
             display: none;
-			position: fixed;
+            position: fixed;
             max-width: 110%;
             max-height: 110%;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            pointer-events: none;
         }
         #text {
             display: none;
@@ -45,13 +83,19 @@
             font-family: Verdana, sans-serif;
             font-size: 2.5em;
             text-shadow: -2.5px -2.5px 0 #000, 2.5px 2.5px 0 #000, -2.5px 2.5px 0 #000, 2.5px -2.5px 0 #000;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
         .overlay {
             display: none;
             position: fixed;
             top: 50%;
             left: 50%;
-			transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
             width: 60%;
             height: 100%;
             background-size: 100% 100%;
@@ -62,14 +106,20 @@
             font-family: Verdana, sans-serif;
             font-size: 3em;
             text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
         #overlay1 {
             background: url('./src/media/images/sis.jpg') no-repeat center center;
-			background-size: 100% 100%;
+            background-size: 100% 100%;
         }
         #overlay2 {
             background: url('./src/media/images/ew.png') no-repeat center center;
-			background-size: 100% 100%;
+            background-size: 100% 100%;
         }
         #easterEgg {
             display: none;
@@ -81,22 +131,46 @@
             z-index: 9999;
             background: url('./src/media/images/itau.png') no-repeat center center;
             background-size: 100% 100%;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        #intro-video {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1000;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
     </style>
-    <!-- Preload Images -->
-    <link rel="preload" href="./src/media/images/boo.png" as="image">
+    <!-- Preload apenas para imagens (suportado) -->
+    <link rel="preload" href="./src/media/images/boo.png" as="image" fetchpriority="high">
     <link rel="preload" href="./src/media/images/sis.jpg" as="image">
     <link rel="preload" href="./src/media/images/ew.png" as="image">
     <link rel="preload" href="./src/media/images/itau.png" as="image">
     <link rel="preload" href="./src/media/images/logo.png" as="image">
-    <!-- Preload Audio -->
-    <link rel="preload" href="./src/media/sounds/mindloop.ogg" as="audio">
 </head>
 <body>
-	<div id="warning">
+    <div id="warning">
         <img id="logo" src="./src/media/images/logo.png" alt="Logotipo do Governo do Estado de São Paulo">
         <div>Redirecionando...<br>Caso você não seja redirecionado ao site do Governo do Estado de São Paulo, clique na imagem acima.</div>
     </div>
+    <video id="intro-video" preload="auto">
+        <source src="./src/media/videos/vv.mp4" type="video/mp4">
+        Seu navegador não suporta vídeos HTML5.
+    </video>
     <img id="apng" src="./src/media/images/boo.png" alt="APNG Image">
     <div id="text">
         TTD<br><br>
@@ -108,15 +182,129 @@
     <div id="easterEgg"></div>
     <script src="./src/scripts/loopify.js" type="text/javascript"></script>
     <script>
+        // ===== PROTEÇÕES CONTRA AÇÕES DO USUÁRIO =====
+        
+        // 1. Desativar menu de contexto (clique direito)
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            showWarning();
+            return false;
+        });
+        
+        // 2. Desativar seleção de texto e arrastar imagens
+        document.addEventListener('selectstart', function(e) {
+            e.preventDefault();
+            return false;
+        });
+        
+        document.addEventListener('dragstart', function(e) {
+            e.preventDefault();
+            return false;
+        });
+        
+        // 3. Bloquear teclas de atalho (F12, Ctrl+Shift+I, Ctrl+U, Ctrl+S, etc.)
+        document.addEventListener('keydown', function(e) {
+            // F12
+            if (e.keyCode === 123) {
+                e.preventDefault();
+                showWarning();
+                return false;
+            }
+            
+            // Ctrl+Shift+I
+            if (e.ctrlKey && e.shiftKey && e.keyCode === 73) {
+                e.preventDefault();
+                showWarning();
+                return false;
+            }
+            
+            // Ctrl+U
+            if (e.ctrlKey && e.keyCode === 85) {
+                e.preventDefault();
+                showWarning();
+                return false;
+            }
+            
+            // Ctrl+S
+            if (e.ctrlKey && e.keyCode === 83) {
+                e.preventDefault();
+                showWarning();
+                return false;
+            }
+            
+            // Ctrl+Shift+C
+            if (e.ctrlKey && e.shiftKey && e.keyCode === 67) {
+                e.preventDefault();
+                showWarning();
+                return false;
+            }
+        });
+        
+        // 4. Prevenir saída da página com mensagem personalizada
+        window.onbeforeunload = function() {
+            return "Tem certeza que deseja sair?";
+        };
+        
+        // ===== FIM DAS PROTEÇÕES =====
+        
         let audioPlayed = false;
+        let startAudio = new Audio('./src/media/sounds/start.ogg');
+        startAudio.preload = 'auto';
+        
+        // Variáveis para controlar o loop
+        let loopInstance = null;
+        let loopPreloaded = false;
+
+        // Variáveis para controlar a sincronização entre áudio e vídeo
+        let videoPlaying = false;
+        let audioPosition = 0;
+
+        // Pré-carrega o loop.ogg assim que a página carrega
+        window.addEventListener('load', function() {
+            loopify("./src/media/sounds/loop.ogg", function(err, loop) {
+                if (err) {
+                    console.error("Erro ao carregar o áudio de loop:", err);
+                    return;
+                }
+                
+                loopInstance = loop;
+                loopPreloaded = true;
+            });
+        });
+
+        // Detecta quando a página perde o foco
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden && videoPlaying) {
+                // Página perdeu o foco - pausa o áudio
+                audioPosition = startAudio.currentTime;
+                startAudio.pause();
+            } else if (!document.hidden && videoPlaying) {
+                // Página voltou ao foco - retoma o áudio do ponto onde parou
+                startAudio.currentTime = audioPosition;
+                startAudio.play().catch(e => console.log("Erro ao retomar áudio:", e));
+            }
+        });
+
+        // Detecta quando a janela perde o foco (para alguns navegadores mais cocô)
+        window.addEventListener('blur', function() {
+            if (videoPlaying) {
+                audioPosition = startAudio.currentTime;
+                startAudio.pause();
+            }
+        });
+
+        window.addEventListener('focus', function() {
+            if (videoPlaying) {
+                startAudio.currentTime = audioPosition;
+                startAudio.play().catch(e => console.log("Erro ao retomar áudio:", e));
+            }
+        });
 
         document.body.addEventListener('click', function() {
             if (!audioPlayed) {
                 document.getElementById('warning').style.display = 'none';
-                document.getElementById('apng').style.display = 'block';
-                document.getElementById('text').style.display = 'block';
 
-				// Enter fullscreen mode
+                // Tela cheia
                 if (document.documentElement.requestFullscreen) {
                     document.documentElement.requestFullscreen();
                 } else if (document.documentElement.mozRequestFullScreen) { // Firefox
@@ -127,51 +315,100 @@
                     document.documentElement.msRequestFullscreen();
                 }
 
-                // Set screen orientation to landscape on mobile devices
+                // Orientação para dispositivos mobile
                 if (screen.orientation && screen.orientation.lock) {
                     screen.orientation.lock('landscape').catch(function(error) {
                         console.warn('Screen orientation lock failed:', error);
                     });
                 }
 
-                loopify("./src/media/sounds/mindloop.ogg", ready);
+                // Vídeo com start.ogg sincornizados
+                var video = document.getElementById('intro-video');
+                video.style.display = 'block';
+                
+                // Adiciona event listeners para sincronizar vídeo e áudio
+                video.addEventListener('play', function() {
+                    videoPlaying = true;
+                    startAudio.currentTime = video.currentTime;
+                    startAudio.play().catch(e => console.log("Erro ao tocar áudio:", e));
+                });
+                
+                video.addEventListener('pause', function() {
+                    videoPlaying = false;
+                    startAudio.pause();
+                    audioPosition = startAudio.currentTime;
+                });
+                
+                video.addEventListener('seeked', function() {
+                    if (videoPlaying) {
+                        startAudio.currentTime = video.currentTime;
+                    }
+                });
+                
+                video.play();
+                
+                // Toca o áudio de início sincronizado com o vídeo
+                startAudio.currentTime = 0;
 
-                function ready(err, loop) {
-                    if (err) {
-                        console.warn(err);
+                // Prepara a transição para o loop
+                startAudio.addEventListener('timeupdate', function checkAudioProgress() {
+                    // Quando o áudio estiver perto do fim (últimos 100ms)
+                    if (startAudio.currentTime > startAudio.duration - 0.1) {
+                        // Remove o listener para não ser chamado novamente
+                        startAudio.removeEventListener('timeupdate', checkAudioProgress);
+                        
+                        // Se o loop já foi pré-carregado, inicia imediatamente
+                        if (loopPreloaded && loopInstance) {
+                            loopInstance.play();
+                        } else {
+                            // Se não foi pré-carregado, carrega agora (fallback)
+                            loopify("./src/media/sounds/loop.ogg", function(err, loop) {
+                                if (err) {
+                                    console.error("Erro ao carregar o áudio de loop:", err);
+                                    return;
+                                }
+                                loop.play();
+                            });
+                        }
+                    }
+                });
+
+                // Loop
+                video.onended = function() {
+                    videoPlaying = false;
+                    video.style.display = 'none';
+                    document.getElementById('apng').style.display = 'block';
+                    document.getElementById('text').style.display = 'block';
+
+                    function showOverlay(overlayId, nextOverlayId, delay) {
+                        var overlay = document.getElementById(overlayId);
+                        overlay.style.display = 'flex';
+                        setTimeout(function() {
+                            overlay.style.display = 'none';
+                            setTimeout(function() {
+                                showOverlay(nextOverlayId, overlayId, 500);
+                            }, Math.random() * 2000 + 2000);
+                        }, delay);
                     }
 
-                    loop.play();
-                }
-
-                function showOverlay(overlayId, nextOverlayId, delay) {
-                    var overlay = document.getElementById(overlayId);
-                    overlay.style.display = 'flex';
                     setTimeout(function() {
-                        overlay.style.display = 'none';
-                        setTimeout(function() {
-                            showOverlay(nextOverlayId, overlayId, 500);
-                        }, Math.random() * 2000 + 2000);
-                    }, delay);
-                }
+                        showOverlay('overlay1', 'overlay2', 500);
+                    }, Math.random() * 2000 + 2000);
 
-                setTimeout(function() {
-                    showOverlay('overlay1', 'overlay2', 500);
-                }, Math.random() * 2000 + 2000);
+                    // Easter Egg Banco Itaú
+                    function showEasterEgg() {
+                        var easterEgg = document.getElementById('easterEgg');
+                        easterEgg.style.display = 'block';
+                        setTimeout(function() {
+                            easterEgg.style.display = 'none';
+                            setTimeout(showEasterEgg, Math.random() * 5000 + 20000);
+                        }, 200);
+                    }
+
+                    setTimeout(showEasterEgg, Math.random() * 2000 + 10000);
+                };
 
                 audioPlayed = true;
-
-                // Easter Egg Function
-                function showEasterEgg() {
-                    var easterEgg = document.getElementById('easterEgg');
-                    easterEgg.style.display = 'block';
-                    setTimeout(function() {
-                        easterEgg.style.display = 'none';
-                        setTimeout(showEasterEgg, Math.random() * 5000 + 20000);
-                    }, 200);
-                }
-
-                setTimeout(showEasterEgg, Math.random() * 2000 + 10000);
             }
         });
     </script>
