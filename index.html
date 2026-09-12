@@ -3,7 +3,7 @@
 <!-- 
 ATENÇÃO: LEIA ATENTAMENTE
 
-Este código-fonte está sob proteção integral da Companhia de Processamento de Dados do Estado de São Paulo – PRODESP.
+Este código-fonte está sob proteção integral da Companhia de Processamento de Dados do Estado de São Paulo – Prodesp.
 O uso indevido, cópia não autorizada ou qualquer forma de acesso não permitido poderá acarretar responsabilização 
 legal, conforme previsto na Lei de Direitos Autorais (Lei nº 9.610/98) e demais normas aplicáveis à segurança da 
 informação e proteção de ativos digitais.
@@ -155,7 +155,6 @@ Como você acha que o cliente está enxergando a Prodesp?
             user-select: none;
         }
     </style>
-    <!-- Preload apenas para imagens (suportado) -->
     <link rel="preload" href="./src/media/images/boo.png" as="image" fetchpriority="high">
     <link rel="preload" href="./src/media/images/sis.jpg" as="image">
     <link rel="preload" href="./src/media/images/ew.png" as="image">
@@ -173,7 +172,7 @@ Como você acha que o cliente está enxergando a Prodesp?
     </video>
     <img id="apng" src="./src/media/images/boo.png" alt="APNG Image">
     <div id="text">
-        TTD, 1 ANO.<br><br>
+        TTD, 2 ANOS.<br><br>
         RESENHA 2<br>
         VIKTROON LENZ 0<br>
     </div>
@@ -182,16 +181,13 @@ Como você acha que o cliente está enxergando a Prodesp?
     <div id="easterEgg"></div>
     <script src="./src/scripts/loopify.js" type="text/javascript"></script>
     <script>
-        // ===== PROTEÇÕES CONTRA AÇÕES DO USUÁRIO =====
         
-        // 1. Desativar menu de contexto (clique direito)
         document.addEventListener('contextmenu', function(e) {
             e.preventDefault();
             showWarning();
             return false;
         });
         
-        // 2. Desativar seleção de texto e arrastar imagens
         document.addEventListener('selectstart', function(e) {
             e.preventDefault();
             return false;
@@ -202,7 +198,6 @@ Como você acha que o cliente está enxergando a Prodesp?
             return false;
         });
         
-        // 3. Bloquear teclas de atalho (F12, Ctrl+Shift+I, Ctrl+U, Ctrl+S, etc.)
         document.addEventListener('keydown', function(e) {
             // F12
             if (e.keyCode === 123) {
@@ -240,26 +235,21 @@ Como você acha que o cliente está enxergando a Prodesp?
             }
         });
         
-        // 4. Prevenir saída da página com mensagem personalizada
         window.onbeforeunload = function() {
             return "Tem certeza que deseja sair?";
         };
         
-        // ===== FIM DAS PROTEÇÕES =====
         
         let audioPlayed = false;
         let startAudio = new Audio('./src/media/sounds/start.ogg');
         startAudio.preload = 'auto';
         
-        // Variáveis para controlar o loop
         let loopInstance = null;
         let loopPreloaded = false;
 
-        // Variáveis para controlar a sincronização entre áudio e vídeo
         let videoPlaying = false;
         let audioPosition = 0;
 
-        // Pré-carrega o loop.ogg assim que a página carrega
         window.addEventListener('load', function() {
             loopify("./src/media/sounds/loop.ogg", function(err, loop) {
                 if (err) {
@@ -272,20 +262,16 @@ Como você acha que o cliente está enxergando a Prodesp?
             });
         });
 
-        // Detecta quando a página perde o foco
         document.addEventListener('visibilitychange', function() {
             if (document.hidden && videoPlaying) {
-                // Página perdeu o foco - pausa o áudio
                 audioPosition = startAudio.currentTime;
                 startAudio.pause();
             } else if (!document.hidden && videoPlaying) {
-                // Página voltou ao foco - retoma o áudio do ponto onde parou
                 startAudio.currentTime = audioPosition;
                 startAudio.play().catch(e => console.log("Erro ao retomar áudio:", e));
             }
         });
 
-        // Detecta quando a janela perde o foco (para alguns navegadores mais cocô)
         window.addEventListener('blur', function() {
             if (videoPlaying) {
                 audioPosition = startAudio.currentTime;
@@ -304,7 +290,6 @@ Como você acha que o cliente está enxergando a Prodesp?
             if (!audioPlayed) {
                 document.getElementById('warning').style.display = 'none';
 
-                // Tela cheia
                 if (document.documentElement.requestFullscreen) {
                     document.documentElement.requestFullscreen();
                 } else if (document.documentElement.mozRequestFullScreen) { // Firefox
@@ -315,18 +300,15 @@ Como você acha que o cliente está enxergando a Prodesp?
                     document.documentElement.msRequestFullscreen();
                 }
 
-                // Orientação para dispositivos mobile
                 if (screen.orientation && screen.orientation.lock) {
                     screen.orientation.lock('landscape').catch(function(error) {
                         console.warn('Screen orientation lock failed:', error);
                     });
                 }
 
-                // Vídeo com start.ogg sincornizados
                 var video = document.getElementById('intro-video');
                 video.style.display = 'block';
                 
-                // Adiciona event listeners para sincronizar vídeo e áudio
                 video.addEventListener('play', function() {
                     videoPlaying = true;
                     startAudio.currentTime = video.currentTime;
@@ -347,21 +329,15 @@ Como você acha que o cliente está enxergando a Prodesp?
                 
                 video.play();
                 
-                // Toca o áudio de início sincronizado com o vídeo
                 startAudio.currentTime = 0;
 
-                // Prepara a transição para o loop
                 startAudio.addEventListener('timeupdate', function checkAudioProgress() {
-                    // Quando o áudio estiver perto do fim (últimos 100ms)
                     if (startAudio.currentTime > startAudio.duration - 0.1) {
-                        // Remove o listener para não ser chamado novamente
                         startAudio.removeEventListener('timeupdate', checkAudioProgress);
                         
-                        // Se o loop já foi pré-carregado, inicia imediatamente
                         if (loopPreloaded && loopInstance) {
                             loopInstance.play();
                         } else {
-                            // Se não foi pré-carregado, carrega agora (fallback)
                             loopify("./src/media/sounds/loop.ogg", function(err, loop) {
                                 if (err) {
                                     console.error("Erro ao carregar o áudio de loop:", err);
@@ -373,7 +349,6 @@ Como você acha que o cliente está enxergando a Prodesp?
                     }
                 });
 
-                // Loop
                 video.onended = function() {
                     videoPlaying = false;
                     video.style.display = 'none';
@@ -395,7 +370,6 @@ Como você acha que o cliente está enxergando a Prodesp?
                         showOverlay('overlay1', 'overlay2', 500);
                     }, Math.random() * 2000 + 2000);
 
-                    // Easter Egg Banco Itaú
                     function showEasterEgg() {
                         var easterEgg = document.getElementById('easterEgg');
                         easterEgg.style.display = 'block';
